@@ -92,3 +92,4 @@ From version 2, hakrawler has been completely rewritten and dramatically simplif
 - Many features have been deprecated (robots.txt parsing, JS file parsing, sitemap parsing, waybackurls), instead, these features are written into separate tools that can be piped to from hakrawler.
 - No more terminal colours because they can cause annoying issues when piping to other tools.
 - Version 1 was my first ever Go project and the code was bad.
+# backlink-generator
