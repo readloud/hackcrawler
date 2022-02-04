@@ -2,6 +2,69 @@
 
 Fast golang web crawler for gathering URLs and JavaSript file locations. This is basically a simple implementation of the awesome Gocolly library.
 
+## Installation
+
+### Normal Install
+
+First, you'll need to [install go](https://golang.org/doc/install).
+
+Then run this command to download + compile hakrawler:
+```
+go install github.com/hakluke/hakrawler@latest
+```
+
+You can now run `~/go/bin/hakrawler`. 
+
+If you'd like to just run `hakrawler` without the full path, you'll need to `export PATH="/go/bin/:$PATH"`. 
+
+You can also add this line to your `~/.bashrc` file if you'd like this to persist.
+
+or
+```
+echo  https://www.google.com  | go run hakrawler.go -subs
+```
+
+### Local Docker Install
+
+It's much easier to use the dockerhub method above, but if you'd prefer to run it locally:
+
+```
+git clone https://github.com/hakluke/hakrawler
+cd hakrawler
+docker build -t hakluke/hakrawler .
+```
+or
+```
+docker build -t getting-started .
+docker run --rm -i hakluke/hakrawler --help
+```
+
+Then, to run hakrawler:
+
+```
+echo https://www.google.com | docker run --rm -i hakluke/hakrawler -subs
+```
+or
+```
+echo https://www.google.com | docker run --rm -i hakluke/hakrawler:v2 -subs
+```
+
+## Command-line options
+```
+  -d int
+    	Depth to crawl. (default 2)
+  -h string
+    	Custom headers separated by two semi-colons. E.g. -h "Cookie: foo=bar;;Referer: http://example.com/"
+  -insecure
+    	Disable TLS verification.
+  -s	Show the source of URL based on where it was found (href, form, script, etc.)
+  -subs
+    	Include subdomains for crawling.
+  -t int
+    	Number of threads to utilise. (default 8)
+  -u	Show only unique urls
+```
+
 ## Example usages
 
 Single URL:
@@ -30,58 +93,6 @@ Get all subdomains of google, find the ones that respond to http(s), crawl them 
 
 ```
 echo google.com | haktrails subdomains | httpx | hakrawler
-```
-
-## Installation
-
-### Normal Install
-
-First, you'll need to [install go](https://golang.org/doc/install).
-
-Then run this command to download + compile hakrawler:
-```
-go install github.com/hakluke/hakrawler@latest
-```
-
-You can now run `~/go/bin/hakrawler`. If you'd like to just run `hakrawler` without the full path, you'll need to `export PATH="/go/bin/:$PATH"`. You can also add this line to your `~/.bashrc` file if you'd like this to persist.
-
-### Docker Install (from dockerhub)
-
-```
-echo https://www.google.com | docker run --rm -i hakluke/hakrawler:v2 -subs
-```
-
-### Local Docker Install
-
-It's much easier to use the dockerhub method above, but if you'd prefer to run it locally:
-
-```
-git clone https://github.com/hakluke/hakrawler
-cd hakrawler
-docker build -t hakluke/hakrawler .
-docker run --rm -i hakluke/hakrawler --help
-```
-
-Then, to run hakrawler:
-
-```
-echo https://www.google.com | docker run --rm -i hakluke/hakrawler -subs
-```
-
-## Command-line options
-```
-  -d int
-    	Depth to crawl. (default 2)
-  -h string
-    	Custom headers separated by two semi-colons. E.g. -h "Cookie: foo=bar;;Referer: http://example.com/"
-  -insecure
-    	Disable TLS verification.
-  -s	Show the source of URL based on where it was found (href, form, script, etc.)
-  -subs
-    	Include subdomains for crawling.
-  -t int
-    	Number of threads to utilise. (default 8)
-  -u	Show only unique urls
 ```
 
 ## Version 2 note
